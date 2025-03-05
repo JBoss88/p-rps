@@ -87,3 +87,25 @@ p {
   font-size: 3rem;
   text-align: center;
 }
+
+@media (max-width: 44em) {
+  html {
+    font-size: 50%;
+  }
+  main {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .game-container {
+    gap: 4rem;
+  }
+  .user {
+    grid-column: 1 / 2;
+  }
+}
+
+@media (max-width: 30rem) {
+  html {
+    font-size: 35%;
+  }
+}
