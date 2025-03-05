@@ -9,61 +9,49 @@ let cpuScore = 0;
 let userChoice = "";
 let cpuChoice = "";
 
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("rock")) {
-    userChoice = "rock";
-    console.log("User picks rock");
-    userImg.src = "images/rock.png";
-  } else if (e.target.classList.contains("paper")) {
-    userChoice = "paper";
-    console.log("User picks paper");
-    userImg.src = "images/paper.png";
-  } else if (e.target.classList.contains("scissors")) {
-    userChoice = "scissors";
-    console.log("User picks scissors");
-    userImg.src = "images/scissors.png";
-  }
-  getCpuChoice();
+const btns = document.querySelectorAll(".btn");
+btns.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    userChoice = e.target.textContent;
+    if (userChoice === "Rock") {
+      userImg.src = "images/rock.png";
+    } else if (userChoice === "Paper") {
+      userImg.src = "images/paper.png";
+    } else if (userChoice === "Scissors") {
+      userImg.src = "images/scissors.png";
+    }
+    getCpuChoice();
+  });
 });
 
 function getCpuChoice() {
   let choice = Math.trunc(Math.random() * 3);
   if (choice === 0) {
-    cpuChoice = "rock";
-    console.log("CPU picks rock");
+    cpuChoice = "Rock";
     cpuImg.src = "images/rock.png";
   } else if (choice === 1) {
-    cpuChoice = "paper";
-    console.log("CPU picks paper");
+    cpuChoice = "Paper";
     cpuImg.src = "images/paper.png";
   } else {
-    cpuChoice = "scissors";
-    console.log("CPU picks scissors");
+    cpuChoice = "Scissors";
     cpuImg.src = "images/scissors.png";
   }
   checkConditions();
 }
 
 const checkConditions = () => {
-  if (userChoice === "rock" && cpuChoice === "scissors") {
-    console.log("You win");
+  if (userChoice === "Rock" && cpuChoice === "Scissors") {
     userScore++;
-  } else if (userChoice === "paper" && cpuChoice === "rock") {
-    console.log("You win");
+  } else if (userChoice === "Paper" && cpuChoice === "Rock") {
     userScore++;
-  } else if (userChoice === "scissors" && cpuChoice === "paper") {
-    console.log("You win");
+  } else if (userChoice === "Scissors" && cpuChoice === "Paper") {
     userScore++;
-  } else if (cpuChoice === "rock" && userChoice === "scissors") {
-    console.log("CPU wins");
+  } else if (cpuChoice === "Rock" && userChoice === "Scissors") {
     cpuScore++;
-  } else if (cpuChoice === "paper" && userChoice === "rock") {
-    console.log("CPU wins");
+  } else if (cpuChoice === "Paper" && userChoice === "Rock") {
     cpuScore++;
-  } else if (cpuChoice === "scissors" && userChoice === "paper") {
-    console.log("CPU wins");
+  } else if (cpuChoice === "Scissors" && userChoice === "Paper") {
     cpuScore++;
-    // userScoreEl.value = userScore++;
   } else {
     console.log("Tied!!");
   }
@@ -85,6 +73,8 @@ function resetGame() {
   userScoreEl.textContent = "0";
   cpuScoreEl.textContent = "0";
   gameMessage.textContent = "";
+  userImg.src = "images/gameon.webp";
+  cpuImg.src = "images/gameon.webp";
 }
 
 document.querySelector(".play-again").addEventListener("click", () => {
